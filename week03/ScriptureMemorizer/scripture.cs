@@ -5,12 +5,12 @@ using System.Linq;
 public class Scripture
 {
     private Reference _reference;
-    private List<word> _words;
+    private List<Word> _words;
 
     public Scripture(Reference reference, string text)
     {
         _reference = reference;
-        _words = text.Split(' ').Select(word => new word(word)).ToList();
+        _words = text.Split(' ').Select(word => new Word(word)).ToList();
     }
 
     public void HideRandomWords(int numberToHide)

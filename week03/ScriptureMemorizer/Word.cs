@@ -1,9 +1,9 @@
-public class word
+public class Word
 {
     private string _text;
     private bool _isHidden;
 
-    public word(string text)
+    public Word(string text)
     {
         _text = text;
         _isHidden = false;
