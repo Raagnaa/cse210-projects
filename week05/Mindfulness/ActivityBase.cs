@@ -1,4 +1,5 @@
 using System;
+using System.Threading.Tasks;
 public abstract class ActivityBase
 {
     public string Name { get ; set; }
@@ -18,6 +19,9 @@ public abstract class ActivityBase
     {
         Console.WriteLine("Good job! You have completed the activity.");
         Console.WriteLine($"You completed: {Name} for {Duration} seconds");
+        PauseWithAnimation(3);
+        Console.WriteLine("Here's a motivational sentence for you:");
+        Console.WriteLine(MotivationalSentences.GetRandomSentence());
         PauseWithAnimation(3);
     }
 

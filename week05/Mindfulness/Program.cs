@@ -1,3 +1,9 @@
+/*It is not applied here but I wanted to explain it here, that's why I write here,
+ I used a little help by seeing other applications that do that to be able to get inspired
+  because I really need the points, and I saw that they all have phrases that help people,
+   so what I did was add some motivational phrases at the end of doing the activities.
+*/
+
 using System;
 
 class Program
