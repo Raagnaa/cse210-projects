@@ -1,0 +1,15 @@
+{
+  "goals": [
+    {
+      "ShortName": "Clean",
+      "Description": "Clean the house",
+      "Points": 15
+    },
+    {
+      "ShortName": "Read",
+      "Description": "Read the bible",
+      "Points": 50
+    }
+  ],
+  "score": 115
+}
