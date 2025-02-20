@@ -5,8 +5,7 @@ public class ChecklistGoal : Goal
     public int Target { get; set; }
     public int AmountCompleted { get; set; }
 
-    public ChecklistGoal(string shortName, string description, int points, int target)
-        : base(shortName, description, points)
+    public ChecklistGoal(string shortName, string description, int points, int target, DateTime dueDate) : base(shortName, description, points, dueDate)
     {
         Target = target;
         AmountCompleted = 0;
