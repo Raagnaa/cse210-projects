@@ -7,6 +7,13 @@ public abstract class Goal
     public int Points { get; set; }
     public DateTime DueDate { get; set; }
 
+    protected Goal(string shortName, string description, int points)
+    {
+        ShortName = shortName;
+        Description = description;
+        Points = points;
+    }
+
     protected Goal(string shortName, string description, int points, DateTime dueDate)
     {
         ShortName = shortName;

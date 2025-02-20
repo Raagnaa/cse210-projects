@@ -97,22 +97,26 @@ public class GoalManager
         string description = Console.ReadLine();
         Console.Write("Enter the points for the goal: ");
         int points = int.Parse(Console.ReadLine());
-        Console.Write("Enter the due date (yyyy-MM-dd): ");
-        DateTime dueDate = DateTime.Parse(Console.ReadLine());
+        
+        if (type.Equals("Simple", StringComparison.OrdinalIgnoreCase) || type.Equals("Eternal", StringComparison.OrdinalIgnoreCase))
+        {
+            Console.Write("Enter the due date (yyyy-MM-dd): ");
+            DateTime dueDate = DateTime.Parse(Console.ReadLine());
 
-        if (type.Equals("Simple", StringComparison.OrdinalIgnoreCase))
-        {
-            _goals.Add(new SimpleGoal(shortName, description, points, dueDate));
-        }
-        else if (type.Equals("Eternal", StringComparison.OrdinalIgnoreCase))
-        {
-            _goals.Add(new EternalGoal(shortName, description, points, dueDate));
+            if (type.Equals("Simple", StringComparison.OrdinalIgnoreCase))
+            {
+                _goals.Add(new SimpleGoal(shortName, description, points, dueDate));
+            }
+            else if (type.Equals("Eternal", StringComparison.OrdinalIgnoreCase))
+            {
+                _goals.Add(new EternalGoal(shortName, description, points, dueDate));
+            }
         }
         else if (type.Equals("Checklist", StringComparison.OrdinalIgnoreCase))
         {
             Console.Write("Enter the target count for the checklist goal: ");
             int target = int.Parse(Console.ReadLine());
-            _goals.Add(new ChecklistGoal(shortName, description, points, target, dueDate));
+            _goals.Add(new ChecklistGoal(shortName, description, points, target));
         }
         else
         {
@@ -175,16 +179,20 @@ public class GoalManager
                             string shortName = goalElem.GetProperty("ShortName").GetString();
                             string description = goalElem.GetProperty("Description").GetString();
                             int points = goalElem.GetProperty("Points").GetInt32();
-                            DateTime dueDate = goalElem.GetProperty("DueDate").GetDateTime();
-
-
-                            if (type.Equals(nameof(SimpleGoal), StringComparison.OrdinalIgnoreCase))
+                            
+                            if (type.Equals(nameof(SimpleGoal), StringComparison.OrdinalIgnoreCase) ||
+                                type.Equals(nameof(EternalGoal), StringComparison.OrdinalIgnoreCase))
                             {
-                                _goals.Add(new SimpleGoal(shortName, description, points, dueDate));
-                            }
-                            else if (type.Equals(nameof(EternalGoal), StringComparison.OrdinalIgnoreCase))
-                            {
-                                _goals.Add(new EternalGoal(shortName, description, points, dueDate));
+                                DateTime dueDate = goalElem.GetProperty("DueDate").GetDateTime();
+
+                                if (type.Equals(nameof(SimpleGoal), StringComparison.OrdinalIgnoreCase))
+                                {
+                                    _goals.Add(new SimpleGoal(shortName, description, points, dueDate));
+                                }
+                                else if (type.Equals(nameof(EternalGoal), StringComparison.OrdinalIgnoreCase))
+                                {
+                                    _goals.Add(new EternalGoal(shortName, description, points, dueDate));
+                                }
                             }
                             else if (type.Equals(nameof(ChecklistGoal), StringComparison.OrdinalIgnoreCase))
                             {
@@ -193,7 +201,7 @@ public class GoalManager
                                 {
                                     int target = targetProperty.GetInt32();
                                     int amountCompleted = amountCompletedProperty.GetInt32();
-                                    ChecklistGoal checklistGoal = new ChecklistGoal(shortName, description, points, target, dueDate);
+                                    ChecklistGoal checklistGoal = new ChecklistGoal(shortName, description, points, target);
                                     checklistGoal.SetAmountCompleted(amountCompleted);
                                     _goals.Add(checklistGoal);
                                 }
